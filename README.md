@@ -90,7 +90,7 @@ Não é necessário instalar um servidor de banco de dados separadamente, pois o
 ### 1. Clonar o repositório
 
 ```bash
-git clone [https://github.com/diweiskt/projeto-ecommerce-Vinil.git](https://github.com/diweiskt/projeto-ecommerce-Vinil.git)
+git clone https://github.com/diweiskt/projeto-ecommerce-Vinil.git
 cd projeto-ecommerce-Vinil
 ```
 
