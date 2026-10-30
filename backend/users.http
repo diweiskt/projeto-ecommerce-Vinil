@@ -1,0 +1,79 @@
+### Criar usuário
+
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Henrique Prediger",
+  "email": "henrique@email.com",
+  "password": "123456"
+}
+
+### Listar usuários
+
+GET http://localhost:3000/api/users
+
+### Buscar usuário pelo ID
+
+GET http://localhost:3000/api/users/1
+
+### Usuário inexistente
+
+GET http://localhost:3000/api/users/999
+
+### Atualizar usuário
+
+PUT http://localhost:3000/api/users/1
+Content-Type: application/json
+
+{
+  "name": "Henrique Terres Prediger"
+}
+
+### Teste de email inválido
+
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Teste",
+  "email": "isso-nao-e-email",
+  "password": "123456"
+}
+
+### Teste senha curta
+
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Teste",
+  "email": "teste@email.com",
+  "password": "123"
+}
+
+### Email repetido
+
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Outro Henrique",
+  "email": "henrique@email.com",
+  "password": "abcdef"
+}
+
+### Usuário temporário
+
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Usuario Temporario",
+  "email": "temporario@email.com",
+  "password": "123456"
+}
+
+### Excluir usuário temporário
+
+DELETE http://localhost:3000/api/users/2

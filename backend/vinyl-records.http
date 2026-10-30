@@ -1,0 +1,219 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsImVtYWlsIjoidXN1YXJpb0B1cGYuYnIiLCJuYW1lIjoidXN1YXJpbyIsImlhdCI6MTc5MTQwMzYwNCwiZXhwIjoxNzkxNDkwMDA0fQ.HhxPNTHCV26uTtOKY0R1bELrNakEqFUW5WR60anc948
+
+### Criar disco - Pink Floyd
+
+POST http://localhost:3000/api/vinyl-records
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "The Dark Side of the Moon",
+    "releaseYear": 1973,
+    "price": 199.90,
+    "condition": "Novo",
+    "rpmSpeed": 33,
+    "stockQuantity": 5,
+    "artistId": 1,
+    "genreId": 1
+}
+
+### Criar disco - Metallica
+
+POST http://localhost:3000/api/vinyl-records
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Master of Puppets",
+    "releaseYear": 1986,
+    "price": 179.90,
+    "condition": "Novo",
+    "rpmSpeed": 33,
+    "stockQuantity": 3,
+    "artistId": 2,
+    "genreId": 2
+}
+
+### Criar disco - Wish You Were Here
+
+POST http://localhost:3000/api/vinyl-records
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Wish You Were Here",
+    "releaseYear": 1975,
+    "price": 189.90,
+    "condition": "Usado - VG",
+    "rpmSpeed": 33,
+    "stockQuantity": 2,
+    "artistId": 1,
+    "genreId": 1
+}
+
+### Listar discos
+
+GET http://localhost:3000/api/vinyl-records
+Authorization: Bearer {{token}}
+
+### Buscar disco por ID
+
+GET http://localhost:3000/api/vinyl-records/9
+Authorization: Bearer {{token}}
+
+### Disco inexistente
+
+GET http://localhost:3000/api/vinyl-records/999
+Authorization: Bearer {{token}}
+
+### Artista inexistente
+
+POST http://localhost:3000/api/vinyl-records
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Disco Teste",
+    "releaseYear": 2000,
+    "price": 50,
+    "condition": "Novo",
+    "rpmSpeed": 33,
+    "stockQuantity": 1,
+    "artistId": 999,
+    "genreId": 1
+}
+
+### Gênero inexistente
+
+POST http://localhost:3000/api/vinyl-records
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Disco Teste",
+    "releaseYear": 2000,
+    "price": 50,
+    "condition": "Novo",
+    "rpmSpeed": 33,
+    "stockQuantity": 1,
+    "artistId": 1,
+    "genreId": 999
+}
+
+### RPM inválido
+
+POST http://localhost:3000/api/vinyl-records
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Disco Teste",
+    "releaseYear": 2000,
+    "price": 50,
+    "condition": "Novo",
+    "rpmSpeed": 100,
+    "stockQuantity": 1,
+    "artistId": 1,
+    "genreId": 1
+}
+
+### Estoque inválido
+
+POST http://localhost:3000/api/vinyl-records
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Disco Teste",
+    "releaseYear": 2000,
+    "price": 50,
+    "condition": "Novo",
+    "rpmSpeed": 33,
+    "stockQuantity": -5,
+    "artistId": 1,
+    "genreId": 1
+}
+
+### Preço inválido
+
+POST http://localhost:3000/api/vinyl-records
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Disco Teste",
+    "releaseYear": 2000,
+    "price": -100,
+    "condition": "Novo",
+    "rpmSpeed": 33,
+    "stockQuantity": 2,
+    "artistId": 1,
+    "genreId": 1
+}
+
+### Atualizar preço e estoque
+
+PUT http://localhost:3000/api/vinyl-records/9
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "coverUrl": "/images/smack_yo.jpg"
+}
+
+### Criar disco temporário
+
+POST http://localhost:3000/api/vinyl-records
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Disco Temporario",
+    "releaseYear": 2000,
+    "price": 10,
+    "condition": "Usado",
+    "rpmSpeed": 33,
+    "stockQuantity": 1,
+    "artistId": 1,
+    "genreId": 1
+}
+
+### Excluir disco temporário
+
+DELETE http://localhost:3000/api/vinyl-records/4
+Authorization: Bearer {{token}}
+
+### Buscar pelo título
+
+GET http://localhost:3000/api/vinyl-records?title=Dark
+Authorization: Bearer {{token}}
+
+### Filtrar por artista
+
+GET http://localhost:3000/api/vinyl-records?artistId=1
+Authorization: Bearer {{token}}
+
+### Filtrar por gênero
+
+GET http://localhost:3000/api/vinyl-records?genreId=1
+Authorization: Bearer {{token}}
+
+### Filtrar por RPM
+
+GET http://localhost:3000/api/vinyl-records?rpmSpeed=33
+Authorization: Bearer {{token}}
+
+### Faixa de preço
+
+GET http://localhost:3000/api/vinyl-records?minPrice=180&maxPrice=220
+Authorization: Bearer {{token}}
+
+### Somente produtos em estoque
+
+GET http://localhost:3000/api/vinyl-records?inStock=true
+Authorization: Bearer {{token}}
+
+### Filtros combinados
+
+GET http://localhost:3000/api/vinyl-records?genreId=1&rpmSpeed=33&minPrice=100&maxPrice=250&inStock=true
+Authorization: Bearer {{token}}

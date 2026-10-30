@@ -1,0 +1,419 @@
+/* PÁGINA DE ARTISTAS */
+.catalog {
+  width: 100%;
+  max-width: 1600px;
+  min-height: 70vh;
+  margin: 0 auto;
+  padding: 90px 7% 110px;
+
+  background-color: #f4efe6;
+  color: #27231d;
+}
+
+/* CABEÇALHO */
+.heading {
+  margin-bottom: 45px;
+}
+
+.eyebrow {
+  display: inline-block;
+
+  color: #a43d27;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.heading h1 {
+  margin: 14px 0 16px;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+}
+
+.heading p {
+  max-width: 580px;
+  margin: 0;
+
+  color: #62594e;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* BUSCA */
+.filters {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+
+  margin-bottom: 30px;
+  padding: 18px;
+
+  background-color: #eae1d5;
+  border: 1px solid #ded3c4;
+}
+
+.filters input {
+  flex: 1;
+  min-width: 0;
+  min-height: 50px;
+  padding: 0 16px;
+
+  background-color: #fdfaf5;
+  border: 1px solid #d8cbb9;
+  border-radius: 0;
+
+  color: #27231d;
+  font-family: inherit;
+  font-size: 13px;
+
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+/* Caixa de busca com sugestões (SearchBox) */
+.search {
+  flex: 1;
+  min-width: 0;
+}
+
+.filters input::placeholder {
+  color: #918477;
+}
+
+.filters input:focus {
+  outline: none;
+  border-color: #a43d27;
+  background-color: #fffdf9;
+}
+
+.filters button {
+  min-height: 50px;
+  padding: 0 28px;
+
+  background-color: #a43d27;
+  border: 1px solid #a43d27;
+  border-radius: 0;
+
+  color: #f4efe6;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.filters button:hover {
+  background-color: #27231d;
+  border-color: #27231d;
+}
+
+.filters button:focus-visible,
+.results a:focus-visible,
+.empty a:focus-visible,
+.card:focus-visible {
+  outline: 2px solid #a43d27;
+  outline-offset: 4px;
+}
+
+/* CONTADOR E LIMPAR BUSCA */
+.results {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  margin-bottom: 28px;
+  padding-bottom: 15px;
+
+  border-bottom: 1px solid #d9cdbd;
+
+  color: #75695c;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.results a {
+  color: #a43d27;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  text-transform: none;
+
+  transition: color 0.25s ease;
+}
+
+.results a:hover {
+  color: #27231d;
+}
+
+/* GRADE DE ARTISTAS */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 25px;
+}
+
+.card {
+  position: relative;
+  min-height: 300px;
+  padding: 28px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+
+  overflow: hidden;
+
+  background-color: #eee6da;
+  border: 1px solid #ded3c4;
+
+  color: #27231d;
+  text-decoration: none;
+
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.card:hover {
+  background-color: #e8dece;
+  border-color: #a43d27;
+  transform: translateY(-4px);
+}
+
+.initial {
+  position: absolute;
+  top: 6px;
+  right: 22px;
+
+  color: rgba(164, 61, 39, 0.14);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 110px;
+  line-height: 1;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.cardBody {
+  position: relative;
+  flex: 1;
+}
+
+.country {
+  display: inline-block;
+
+  color: #a43d27;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.card h2 {
+  margin: 12px 0 14px;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(25px, 2.4vw, 32px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+}
+
+.card p {
+  margin: 0;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  color: #62594e;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.cardLink {
+  align-self: flex-start;
+  padding-bottom: 6px;
+
+  border-bottom: 1px solid #a43d27;
+
+  color: #27231d;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+
+  transition: color 0.25s ease;
+}
+
+.card:hover .cardLink {
+  color: #a43d27;
+}
+
+/* ESTADO VAZIO */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 300px;
+  padding: 45px 25px;
+
+  background-color: #eee6da;
+  border: 1px solid #ded3c4;
+
+  text-align: center;
+}
+
+.empty h2 {
+  margin: 0 0 14px;
+
+  color: #27231d;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(25px, 3vw, 34px);
+  font-weight: 400;
+}
+
+.empty p {
+  max-width: 420px;
+  margin: 0 0 24px;
+
+  color: #75695c;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.empty p:last-child {
+  margin-bottom: 0;
+}
+
+.empty a {
+  display: inline-block;
+  padding-bottom: 6px;
+
+  color: #a43d27;
+  border-bottom: 1px solid #a43d27;
+
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.empty a:hover {
+  color: #27231d;
+  border-color: #27231d;
+}
+
+/* RODAPÉ */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 28px 7%;
+
+  background-color: #1d1a16;
+  border-top: 1px solid rgba(244, 239, 230, 0.12);
+
+  color: #c0b5a5;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+}
+
+.footer p {
+  margin: 0;
+}
+
+/* TABLETS */
+@media (max-width: 1100px) {
+  .catalog {
+    padding: 75px 5% 90px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+/* CELULARES */
+@media (max-width: 700px) {
+  .catalog {
+    padding: 60px 6% 75px;
+  }
+
+  .heading {
+    margin-bottom: 30px;
+  }
+
+  .heading h1 {
+    font-size: 38px;
+    letter-spacing: -0.8px;
+  }
+
+  .heading p {
+    font-size: 14px;
+  }
+
+  .filters {
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .filters input,
+  .filters button {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .search {
+    flex: none;
+    width: 100%;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: 0;
+    padding: 24px;
+  }
+
+  .results {
+    align-items: flex-start;
+    font-size: 10px;
+  }
+
+  .footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    padding: 25px 6%;
+  }
+}

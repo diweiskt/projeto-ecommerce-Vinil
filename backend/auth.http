@@ -1,0 +1,55 @@
+### Registrar usuário
+
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "name": "Usuario Login",
+    "email": "login@email.com",
+    "password": "123456"
+}
+
+### Fazer login
+
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "login@email.com",
+    "password": "123456"
+}
+
+### Login com senha incorreta
+
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "login@email.com",
+    "password": "999999"
+}
+
+### Login usuário inexistente
+
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "ninguem@email.com",
+    "password": "123456"
+}
+
+### Listar usuários SEM TOKEN
+
+GET http://localhost:3000/api/users
+
+### Listar usuários COM TOKEN
+
+GET http://localhost:3000/api/users
+Authorization: Bearer TOKEN
+
+### Token inválido
+
+GET http://localhost:3000/api/users
+Authorization: Bearer abc123
+

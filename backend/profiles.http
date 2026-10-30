@@ -1,0 +1,56 @@
+### Criar perfil
+
+POST http://localhost:3000/api/profiles
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "fullName": "Henrique Terres Prediger",
+  "birthDate": "2006-10-15"
+}
+
+### Teste relação 1:1
+
+POST http://localhost:3000/api/profiles
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "fullName": "Outro Perfil"
+}
+
+### Profile para usuário inexistente
+
+POST http://localhost:3000/api/profiles
+Content-Type: application/json
+
+{
+  "userId": 9999,
+  "fullName": "Teste"
+}
+
+### Listar perfis
+
+GET http://localhost:3000/api/profiles
+
+### Buscar perfil
+
+GET http://localhost:3000/api/profiles/1
+
+### Atualizar perfil
+
+PUT http://localhost:3000/api/profiles/1
+Content-Type: application/json
+
+{
+  "fullName": "Henrique Prediger"
+}
+
+### Atualizar avatar
+
+PUT http://localhost:3000/api/profiles/1
+Content-Type: application/json
+
+{
+  "avatarUrl": "https://example.com/avatar.jpg"
+}

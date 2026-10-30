@@ -1,0 +1,134 @@
+.card {
+  cursor: pointer;
+}
+
+.link {
+  display: block;
+
+  color: inherit;
+  text-decoration: none;
+}
+
+.link:focus-visible {
+  outline: 2px solid #a43d27;
+  outline-offset: 6px;
+}
+
+.cover {
+  height: 300px;
+  background: #ded7cb;
+
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coverImage {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 0;
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.5s ease;
+}
+
+.card:hover .coverImage {
+  transform: rotate(25deg) scale(1.05);
+}
+
+.record {
+  width: 220px;
+  height: 220px;
+
+  border-radius: 50%;
+
+  background: repeating-radial-gradient(
+    circle,
+    #111 0px,
+    #111 2px,
+    #1d1d1d 3px,
+    #111 4px
+  );
+
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.2);
+
+  transition: transform 0.5s ease;
+}
+
+.card:hover .record {
+  transform: rotate(25deg) scale(1.05);
+}
+
+.recordCenter {
+  width: 55px;
+  height: 55px;
+
+  border-radius: 50%;
+
+  background: #a43d27;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+.genre {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 2;
+
+  background: #f4efe6;
+  padding: 6px 10px;
+
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.info {
+  padding-top: 18px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.info h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.info p {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 13px;
+}
+
+.info strong {
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.details {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+
+  color: #888;
+  font-size: 11px;
+}
+
+.details span:not(:last-child)::after {
+  content: "•";
+  margin-left: 8px;
+}

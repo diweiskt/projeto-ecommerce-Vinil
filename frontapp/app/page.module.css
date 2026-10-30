@@ -1,0 +1,302 @@
+/* SEÇÃO DE DISCOS EM DESTAQUE */
+.section {
+  padding: 100px 7%;
+  background-color: #f4efe6;
+  color: #27231d;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 45px;
+}
+
+.sectionLabel {
+  display: inline-block;
+  color: #a43d27;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.sectionHeader h2 {
+  margin: 12px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+}
+
+.viewAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0 0 7px;
+
+  color: #27231d;
+  border-bottom: 1px solid #a43d27;
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.viewAll:hover {
+  color: #a43d27;
+  border-color: #27231d;
+}
+
+/* GRID DOS DISCOS */
+.vinylGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 25px;
+}
+
+/* SEÇÃO DE GÊNEROS */
+.genres {
+  padding: 100px 7%;
+  background-color: #27231d;
+  color: #f4efe6;
+}
+
+.genres .sectionHeader {
+  margin-bottom: 40px;
+}
+
+.genres .sectionLabel {
+  color: #d58a6f;
+}
+
+.genreGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.genreCard {
+  position: relative;
+  min-height: 230px;
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  overflow: hidden;
+
+  background-color: #353027;
+  border: 1px solid rgba(244, 239, 230, 0.12);
+  border-radius: 8px;
+
+  color: #f4efe6;
+  text-decoration: none;
+
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.genreCard > span:first-child {
+  color: #c0b5a5;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.genreCard h3 {
+  margin: 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(25px, 3vw, 34px);
+  font-weight: 400;
+  letter-spacing: -0.5px;
+
+  transition: color 0.3s ease;
+}
+
+.genreCard .genreArrow {
+  position: absolute;
+  right: 24px;
+  bottom: 25px;
+
+  color: #d58a6f;
+  font-size: 20px;
+
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+.genreCard:hover {
+  background-color: #a43d27;
+  border-color: #a43d27;
+  transform: translateY(-4px);
+}
+
+.genreCard:hover > span:first-child {
+  color: #f0c7b7;
+}
+
+.genreCard:hover .genreArrow {
+  color: #fff0e7;
+  transform: translate(3px, -3px);
+}
+
+/* SOBRE A LOJA */
+.about {
+  padding: 110px 12%;
+
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 80px;
+
+  background-color: #e5dccf;
+  color: #27231d;
+}
+
+.about h2 {
+  margin: 18px 0 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(30px, 4vw, 43px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+.about p {
+  margin: 0;
+  padding-left: 25px;
+  border-left: 2px solid #a43d27;
+
+  color: #62594e;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* RODAPÉ */
+.footer {
+  padding: 28px 7%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  background-color: #1d1a16;
+  border-top: 1px solid rgba(244, 239, 230, 0.12);
+
+  color: #c0b5a5;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+}
+
+.footer p {
+  margin: 0;
+}
+
+/* TABLETS */
+@media (max-width: 1000px) {
+  .section,
+  .genres {
+    padding: 80px 5%;
+  }
+
+  .vinylGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 35px 22px;
+  }
+
+  .genreGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about {
+    padding: 85px 7%;
+    gap: 40px;
+  }
+}
+
+/* CELULARES */
+@media (max-width: 600px) {
+  .section,
+  .genres {
+    padding: 65px 6%;
+  }
+
+  .sectionHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 32px;
+  }
+
+  .sectionHeader h2 {
+    font-size: 32px;
+  }
+
+  .vinylGrid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .genreGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .genreCard {
+    min-height: 175px;
+    padding: 16px;
+  }
+
+  .genreCard h3 {
+    font-size: 25px;
+  }
+
+  .genreCard .genreArrow {
+    right: 15px;
+    bottom: 15px;
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 75px 7%;
+  }
+
+  .about h2 {
+    font-size: 32px;
+  }
+
+  .about p {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  .footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    padding: 25px 6%;
+  }
+}
+
+@media (max-width: 360px) {
+  .genreGrid {
+    grid-template-columns: 1fr;
+  }
+}

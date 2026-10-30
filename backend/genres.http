@@ -1,0 +1,75 @@
+@token = COLARAQUI
+
+### Criar gênero - Rock
+
+POST http://localhost:3000/api/genres
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Rock",
+    "description": "Gênero musical marcado pelo uso de guitarras, baixo e bateria."
+}
+
+### Criar gênero - Heavy Metal
+
+POST http://localhost:3000/api/genres
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Heavy Metal",
+    "description": "Gênero derivado do rock com sonoridade mais pesada."
+}
+
+### Listar gêneros
+
+GET http://localhost:3000/api/genres
+Authorization: Bearer {{token}}
+
+### Buscar gênero
+
+GET http://localhost:3000/api/genres/1
+Authorization: Bearer {{token}}
+
+### Gênero inexistente
+
+GET http://localhost:3000/api/genres/999
+Authorization: Bearer {{token}}
+
+### Gênero duplicado
+
+POST http://localhost:3000/api/genres
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Rock",
+    "description": "Outro rock"
+}
+
+### Atualizar gênero
+
+PUT http://localhost:3000/api/genres/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "description": "Gênero musical amplo com forte presença de guitarras, baixo e bateria."
+}
+
+### Criar gênero temporário
+
+POST http://localhost:3000/api/genres
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Teste",
+    "description": "Gênero temporário para testar exclusão."
+}
+
+### Excluir gênero temporário
+
+DELETE http://localhost:3000/api/genres/3
+Authorization: Bearer {{token}}

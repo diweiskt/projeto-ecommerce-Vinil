@@ -1,0 +1,83 @@
+@token = COLARAQUI
+
+### Criar artista - Pink Floyd
+
+POST http://localhost:3000/api/artists
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Pink Floyd",
+    "country": "Reino Unido",
+    "bio": "Banda britânica de rock progressivo."
+}
+
+### Criar artista - Metallica
+
+POST http://localhost:3000/api/artists
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Metallica",
+    "country": "Estados Unidos",
+    "bio": "Banda norte-americana de heavy metal."
+}
+
+### Listar artistas
+
+GET http://localhost:3000/api/artists
+Authorization: Bearer {{token}}
+
+### Buscar artista
+
+GET http://localhost:3000/api/artists/1
+Authorization: Bearer {{token}}
+
+### Artista inexistente
+
+GET http://localhost:3000/api/artists/999
+Authorization: Bearer {{token}}
+
+### Atualizar artista
+
+PUT http://localhost:3000/api/artists/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "bio": "Banda britânica formada em Londres, conhecida pelo rock progressivo."
+}
+
+### Artista inválido
+
+POST http://localhost:3000/api/artists
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "P",
+    "country": "R",
+    "bio": "x"
+}
+
+### Artistas sem token
+
+GET http://localhost:3000/api/artists
+
+### Criar artista temporário
+
+POST http://localhost:3000/api/artists
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Artista Teste",
+    "country": "Brasil",
+    "bio": "Registro temporário para testar exclusão."
+}
+
+### Excluir artista temporário
+
+DELETE http://localhost:3000/api/artists/3
+Authorization: Bearer {{token}}
