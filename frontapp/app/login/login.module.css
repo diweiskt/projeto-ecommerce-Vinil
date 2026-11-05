@@ -517,3 +517,25 @@
   line-height: 1.5;
   color: #655f55;
 }
+
+.formSection,
+.formContainer,
+.field {
+  min-width: 0;
+}
+@media (max-width: 680px) {
+  .field input {
+    min-width: 0;
+    font-size: 16px;
+  }
+  .field input::placeholder {
+    font-size: 13px;
+  }
+  .formOptions {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .formContainer h2 {
+    overflow-wrap: anywhere;
+  }
+}

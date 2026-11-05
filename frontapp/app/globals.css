@@ -18,3 +18,40 @@ button,
 input {
   font-family: inherit;
 }
+
+html {
+  scroll-padding-top: 85px;
+  -webkit-text-size-adjust: 100%;
+}
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+button,
+input[type="submit"],
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+img {
+  max-width: 100%;
+}
+@media (max-width: 680px) {
+  html {
+    scroll-padding-top: 142px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+  }
+}

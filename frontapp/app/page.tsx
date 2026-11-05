@@ -1,5 +1,6 @@
 import styles from "./page.module.css";
 import Link from "next/link";
+import Icon from "./components/Icon";
 import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import VinylCard from "./components/VinylCard/VinylCard";
@@ -62,7 +63,9 @@ export default async function Home() {
 
                 <h3>{genre.name}</h3>
 
-                <span className={styles.genreArrow}>↗</span>
+                <span className={styles.genreArrow}>
+                  <Icon name="arrow" />
+                </span>
               </a>
             ))}
           </div>

@@ -668,3 +668,74 @@
   outline: 2px solid #a43d27;
   outline-offset: 3px;
 }
+
+.page,
+.heading > div,
+.stat,
+.shortcuts a {
+  min-width: 0;
+}
+.subnav {
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+.tableWrap {
+  width: 100%;
+  max-width: 100%;
+  overscroll-behavior-x: contain;
+}
+.stat span,
+.shortcuts strong,
+.shortcuts span {
+  overflow-wrap: anywhere;
+}
+.coverRow > *,
+.coverRow input,
+.fileInput {
+  min-width: 0;
+  max-width: 100%;
+}
+@media (max-width: 600px) {
+  .page {
+    padding-top: 30px;
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    font-size: 16px;
+    min-width: 0;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder {
+    font-size: 12px;
+  }
+  .coverRow {
+    flex-wrap: wrap;
+  }
+  .formActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .formActions > * {
+    flex: none;
+    white-space: normal;
+    padding: 12px;
+  }
+  .subnav {
+    gap: 4px 18px;
+  }
+  .subnav a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 8px 2px;
+  }
+  .confirm {
+    flex-wrap: wrap;
+  }
+  .primary,
+  .secondary {
+    max-width: 100%;
+    white-space: normal;
+  }
+}

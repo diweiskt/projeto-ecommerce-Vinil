@@ -219,7 +219,7 @@ export default function SearchBox({
               aria-selected={index === active}
               className={styles.option}
               // mouseDown (e não click) para escolher antes do campo perder o foco
-              onMouseDown={(event) => {
+              onPointerDown={(event) => {
                 event.preventDefault();
                 choose(match.value);
               }}

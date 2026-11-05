@@ -1,4 +1,5 @@
 .card {
+  min-width: 0;
   cursor: pointer;
 }
 
@@ -15,7 +16,8 @@
 }
 
 .cover {
-  height: 300px;
+  aspect-ratio: 1 / 1;
+  min-width: 0;
   background: #ded7cb;
 
   position: relative;
@@ -27,8 +29,9 @@
 }
 
 .coverImage {
-  width: 220px;
-  height: 220px;
+  width: 74%;
+  height: auto;
+  aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
   display: block;
@@ -43,8 +46,10 @@
 }
 
 .record {
-  width: 220px;
-  height: 220px;
+  position: relative;
+  width: 74%;
+  height: auto;
+  aspect-ratio: 1;
 
   border-radius: 50%;
 
@@ -62,12 +67,14 @@
 }
 
 .card:hover .record {
+  position: relative;
   transform: rotate(25deg) scale(1.05);
 }
 
 .recordCenter {
-  width: 55px;
-  height: 55px;
+  width: 25%;
+  height: auto;
+  aspect-ratio: 1;
 
   border-radius: 50%;
 
@@ -99,7 +106,8 @@
 
   display: flex;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .info h3 {
@@ -121,6 +129,7 @@
 
 .details {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 12px;
 
@@ -131,4 +140,53 @@
 .details span:not(:last-child)::after {
   content: "•";
   margin-left: 8px;
+}
+
+.info > div {
+  min-width: 0;
+  flex: 1 1 120px;
+}
+.info h3,
+.info p {
+  overflow-wrap: anywhere;
+}
+.genre {
+  max-width: calc(100% - 24px);
+  overflow-wrap: anywhere;
+}
+@media (max-width: 700px) {
+  .info {
+    padding-top: 12px;
+  }
+  .info > div {
+    flex-basis: 100%;
+  }
+  .info h3 {
+    font-size: 15px;
+    line-height: 1.35;
+  }
+  .info strong {
+    font-size: 14px;
+  }
+  .details {
+    font-size: 10px;
+    gap: 4px 7px;
+    line-height: 1.5;
+  }
+  .details span:not(:last-child)::after {
+    margin-left: 7px;
+  }
+  .genre {
+    top: 10px;
+    left: 10px;
+    padding: 5px 7px;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+  }
+}
+@media (hover: none) {
+  .card:hover .coverImage,
+  .card:hover .record {
+    transform: none;
+  }
 }

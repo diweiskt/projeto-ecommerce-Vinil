@@ -417,3 +417,24 @@
     padding: 25px 6%;
   }
 }
+
+.card,
+.cardBody {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 700px) {
+  .filters input {
+    font-size: 16px;
+  }
+  .filters input::placeholder {
+    font-size: 12px;
+  }
+  .results {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .catalog {
+    padding-top: 32px;
+  }
+}

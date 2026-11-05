@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import styles from "./HeaderSearch.module.css";
+import Icon from "../Icon";
 import SearchBox, { type Suggestion } from "../SearchBox/SearchBox";
 import { getSearchSuggestionsAction } from "../../lib/search-actions";
 
@@ -30,14 +31,14 @@ export default function HeaderSearch() {
         <div className={styles.searchWrapper}>
           <SearchBox
             name="search"
-            placeholder="Buscar álbum ou artista..."
+            placeholder="Buscar discos ou artistas"
             ariaLabel="Buscar por álbum ou artista"
             suggestions={suggestions}
             className={styles.search}
           />
 
           <button type="submit" className={styles.submit} aria-label="Buscar">
-            ⌕
+            <Icon name="search" />
           </button>
         </div>
       </form>

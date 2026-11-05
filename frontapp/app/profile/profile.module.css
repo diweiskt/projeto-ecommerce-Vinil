@@ -184,3 +184,27 @@
     max-width: 100%;
   }
 }
+
+.field,
+.photoRow > * {
+  min-width: 0;
+}
+.fileInput {
+  max-width: 100%;
+}
+@media (max-width: 600px) {
+  .field input:not([type="file"]) {
+    min-width: 0;
+    font-size: 16px;
+  }
+  .primaryButton,
+  .secondaryLink {
+    width: 100%;
+    padding: 12px 16px;
+    text-align: center;
+  }
+  .helpText,
+  .error {
+    overflow-wrap: anywhere;
+  }
+}
