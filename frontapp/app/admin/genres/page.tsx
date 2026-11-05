@@ -3,11 +3,12 @@ import styles from "../admin.module.css";
 
 import AdminShell from "../AdminShell";
 import DeleteButton from "../DeleteButton";
-import { requireAdmin } from "../../lib/admin";
+import { requirePanelAccess } from "../../lib/admin";
 import { getGenres, getVinyls } from "../../lib/api";
 
 export default async function AdminGenresPage() {
-  await requireAdmin();
+  const user = await requirePanelAccess();
+  const canEdit = user.role === "ADMIN";
 
   const [genres, vinyls] = await Promise.all([
     getGenres().catch(() => null),
@@ -27,9 +28,9 @@ export default async function AdminGenresPage() {
       active="genres"
       title="Gêneros"
       actions={
-        <Link href="/admin/genres/new" className={styles.primary}>
+        canEdit && (<Link href="/admin/genres/new" className={styles.primary}>
           + Novo gênero
-        </Link>
+        </Link>)
       }
     >
       {genres === null ? (
@@ -40,7 +41,7 @@ export default async function AdminGenresPage() {
       ) : genres.length === 0 ? (
         <p className={styles.message}>
           Nenhum gênero cadastrado ainda.{" "}
-          <Link href="/admin/genres/new">Cadastrar o primeiro</Link>
+          {canEdit && (<Link href="/admin/genres/new">Cadastrar o primeiro</Link>)}
         </p>
       ) : (
         <>
@@ -80,7 +81,7 @@ export default async function AdminGenresPage() {
                       <td>{used ?? "—"}</td>
 
                       <td>
-                        <div className={styles.rowActions}>
+                        {canEdit ? <div className={styles.rowActions}>
                           <Link href={`/admin/genres/${genre.id}/edit`}>
                             Editar
                           </Link>
@@ -99,7 +100,7 @@ export default async function AdminGenresPage() {
                               title={genre.name}
                             />
                           )}
-                        </div>
+                        </div> : <span>Somente leitura</span>}
                       </td>
                     </tr>
                   );

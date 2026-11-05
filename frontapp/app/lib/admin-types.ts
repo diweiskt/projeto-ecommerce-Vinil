@@ -33,7 +33,7 @@ export interface UserInput {
   name: string;
   email: string;
   password?: string;
-  role: "ADMIN" | "CUSTOMER";
+  role: "ADMIN" | "CUSTOMER" | "DEMO";
 }
 
 export interface ProfileInput {

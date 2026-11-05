@@ -28,7 +28,7 @@ export default function UserForm({ user }: { user?: UserRecord }) {
         name: String(form.get("name") ?? "").trim(),
         email: String(form.get("email") ?? "").trim(),
         password: String(form.get("password") ?? ""),
-        role: String(form.get("role") ?? "CUSTOMER") as "ADMIN" | "CUSTOMER",
+        role: String(form.get("role") ?? "CUSTOMER") as "ADMIN" | "CUSTOMER" | "DEMO",
       });
       if (result.sessionExpired) {
         router.push("/login");
@@ -90,6 +90,7 @@ export default function UserForm({ user }: { user?: UserRecord }) {
         <select id="role" name="role" defaultValue={user?.role ?? "CUSTOMER"}>
           <option value="CUSTOMER">Cliente</option>
           <option value="ADMIN">Administrador</option>
+          <option value="DEMO">Demonstração (somente leitura)</option>
         </select>
       </div>
       {error && (

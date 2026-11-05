@@ -1,14 +1,16 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import helmet from 'helmet';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.use(helmet());
   app.setGlobalPrefix('api');
 
   app.enableCors({
-    origin: 'http://localhost:3001',
+    origin: (process.env.CORS_ORIGINS || 'http://localhost:3001').split(',').map((origin) => origin.trim()),
   });
 
   app.useGlobalPipes(
@@ -19,7 +21,7 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 3000, '0.0.0.0');
 }
 
 bootstrap();

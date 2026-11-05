@@ -20,11 +20,15 @@ export class RolesGuard implements CanActivate {
       [context.getHandler(), context.getClass()],
     );
 
+    const request = context.switchToHttp().getRequest();
+    if (request.user?.role === 'DEMO' &&
+        !['GET', 'HEAD', 'OPTIONS'].includes(String(request.method).toUpperCase())) {
+      throw new ForbiddenException('Conta de demonstração: somente leitura');
+    }
+
     if (!requiredRoles) {
       return true;
     }
-
-    const request = context.switchToHttp().getRequest();
 
     const user = request.user;
 

@@ -39,7 +39,7 @@ export default async function Header() {
         <Link href="/vinyls">Discos</Link>
         <a href="/artists">Artistas</a>
         <GenresLink />
-        {user?.role === "ADMIN" && <Link href="/admin">Admin</Link>}
+        {(user?.role === "ADMIN" || user?.role === "DEMO") && <Link href="/admin">Admin</Link>}
       </nav>
 
       <div className={styles.actions}>

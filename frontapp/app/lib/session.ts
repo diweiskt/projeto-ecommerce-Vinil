@@ -1,5 +1,6 @@
 import "server-only";
 
+import { cache } from "react";
 import { cookies } from "next/headers";
 
 const COOKIE_NAME = "vinyl_session";
@@ -35,31 +36,22 @@ export async function getToken(): Promise<string | null> {
   return cookieStore.get(COOKIE_NAME)?.value ?? null;
 }
 
-// Lê os dados do usuário a partir do JWT, só para exibir na interface.
-// Quem valida o token de verdade (assinatura) é o backend a cada requisição.
-export async function getSession(): Promise<SessionUser | null> {
+// O backend valida a assinatura e consulta o papel atual no banco.
+export const getSession = cache(async (): Promise<SessionUser | null> => {
   const token = await getToken();
-
-  if (!token) {
-    return null;
-  }
-
+  if (!token) return null;
   try {
-    const payload = JSON.parse(
-      Buffer.from(token.split(".")[1], "base64url").toString("utf8"),
+    const response = await fetch(
+      `${process.env.API_URL || "http://localhost:3000/api"}/auth/me`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+        cache: "no-store",
+        signal: AbortSignal.timeout(10000),
+      },
     );
-
-    if (typeof payload.exp === "number" && payload.exp * 1000 < Date.now()) {
-      return null;
-    }
-
-    return {
-      sub: payload.sub,
-      email: payload.email,
-      name: payload.name,
-      role: payload.role,
-    };
+    if (!response.ok) return null;
+    return (await response.json()) as SessionUser;
   } catch {
     return null;
   }
-}
+});

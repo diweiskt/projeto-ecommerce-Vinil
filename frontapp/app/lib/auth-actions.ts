@@ -44,3 +44,23 @@ export async function logoutAction() {
   await deleteSession();
   redirect("/");
 }
+
+// Credenciais ficam somente no servidor, nunca no bundle do navegador.
+export async function demoLoginAction(): Promise<{ error?: string }> {
+  const email = process.env.DEMO_EMAIL;
+  const password = process.env.DEMO_PASSWORD;
+  if (!email || !password) {
+    return { error: "Demonstração indisponível no momento." };
+  }
+  try {
+    const data = await login(email, password);
+    // Nunca permitir login automático em uma conta administrativa.
+    if (data.user?.role !== "DEMO") {
+      return { error: "Demonstração indisponível no momento." };
+    }
+    await createSession(data.access_token, false);
+    return {};
+  } catch {
+    return { error: "Não foi possível entrar na demonstração. Tente novamente." };
+  }
+}

@@ -3,7 +3,7 @@ import styles from "../admin.module.css";
 
 import AdminShell from "../AdminShell";
 import DeleteButton from "../DeleteButton";
-import { requireAdmin } from "../../lib/admin";
+import { requirePanelAccess } from "../../lib/admin";
 import { getVinyls } from "../../lib/api";
 
 function formatPrice(value: number) {
@@ -11,7 +11,8 @@ function formatPrice(value: number) {
 }
 
 export default async function AdminVinylsPage() {
-  await requireAdmin();
+  const user = await requirePanelAccess();
+  const canEdit = user.role === "ADMIN";
 
   const vinyls = await getVinyls().catch(() => null);
 
@@ -20,9 +21,9 @@ export default async function AdminVinylsPage() {
       active="vinyls"
       title="Discos"
       actions={
-        <Link href="/admin/vinyls/new" className={styles.primary}>
+        canEdit && (<Link href="/admin/vinyls/new" className={styles.primary}>
           + Novo disco
-        </Link>
+        </Link>)
       }
     >
       {vinyls === null ? (
@@ -33,7 +34,7 @@ export default async function AdminVinylsPage() {
       ) : vinyls.length === 0 ? (
         <p className={styles.message}>
           Nenhum disco cadastrado ainda.{" "}
-          <Link href="/admin/vinyls/new">Cadastrar o primeiro</Link>
+          {canEdit && (<Link href="/admin/vinyls/new">Cadastrar o primeiro</Link>)}
         </p>
       ) : (
         <>
@@ -90,13 +91,13 @@ export default async function AdminVinylsPage() {
                     </td>
 
                     <td>
-                      <div className={styles.rowActions}>
+                      {canEdit ? <div className={styles.rowActions}>
                         <Link href={`/admin/vinyls/${vinyl.id}/edit`}>
                           Editar
                         </Link>
 
                         <DeleteButton id={vinyl.id} title={vinyl.title} />
-                      </div>
+                      </div> : <span>Somente leitura</span>}
                     </td>
                   </tr>
                 ))}

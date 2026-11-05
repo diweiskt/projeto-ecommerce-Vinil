@@ -48,7 +48,7 @@ export default async function AdminUsersPage() {
                     <td className={styles.titleCell}>{user.name}</td>
                     <td>{user.email}</td>
                     <td>
-                      {user.role === "ADMIN" ? "Administrador" : "Cliente"}
+                      {user.role === "ADMIN" ? "Administrador" : user.role === "DEMO" ? "Demonstração" : "Cliente"}
                     </td>
                     <td>
                       {new Date(user.createdAt).toLocaleDateString("pt-BR")}

@@ -19,3 +19,11 @@ export async function requireAdmin(): Promise<SessionUser> {
 
   return user;
 }
+
+// Somente páginas de consulta; ações e formulários continuam usando requireAdmin.
+export async function requirePanelAccess(): Promise<SessionUser> {
+  const user = await getSession();
+  if (!user) redirect("/login");
+  if (!["ADMIN", "DEMO"].includes(user.role)) notFound();
+  return user;
+}

@@ -3,11 +3,12 @@ import styles from "../admin.module.css";
 
 import AdminShell from "../AdminShell";
 import DeleteButton from "../DeleteButton";
-import { requireAdmin } from "../../lib/admin";
+import { requirePanelAccess } from "../../lib/admin";
 import { getArtists, getVinyls } from "../../lib/api";
 
 export default async function AdminArtistsPage() {
-  await requireAdmin();
+  const user = await requirePanelAccess();
+  const canEdit = user.role === "ADMIN";
 
   const [artists, vinyls] = await Promise.all([
     getArtists().catch(() => null),
@@ -27,9 +28,9 @@ export default async function AdminArtistsPage() {
       active="artists"
       title="Artistas"
       actions={
-        <Link href="/admin/artists/new" className={styles.primary}>
+        canEdit && (<Link href="/admin/artists/new" className={styles.primary}>
           + Novo artista
-        </Link>
+        </Link>)
       }
     >
       {artists === null ? (
@@ -40,7 +41,7 @@ export default async function AdminArtistsPage() {
       ) : artists.length === 0 ? (
         <p className={styles.message}>
           Nenhum artista cadastrado ainda.{" "}
-          <Link href="/admin/artists/new">Cadastrar o primeiro</Link>
+          {canEdit && (<Link href="/admin/artists/new">Cadastrar o primeiro</Link>)}
         </p>
       ) : (
         <>
@@ -83,7 +84,7 @@ export default async function AdminArtistsPage() {
                       <td>{used ?? "—"}</td>
 
                       <td>
-                        <div className={styles.rowActions}>
+                        {canEdit ? <div className={styles.rowActions}>
                           <Link href={`/admin/artists/${artist.id}/edit`}>
                             Editar
                           </Link>
@@ -102,7 +103,7 @@ export default async function AdminArtistsPage() {
                               title={artist.name}
                             />
                           )}
-                        </div>
+                        </div> : <span>Somente leitura</span>}
                       </td>
                     </tr>
                   );

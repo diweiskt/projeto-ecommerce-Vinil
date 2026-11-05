@@ -14,6 +14,8 @@ export default async function ProfilePage() {
     redirect("/login");
   }
 
+  if (user.role === "DEMO") redirect("/admin");
+
   const result = await getMyProfile();
 
   if (result.error || !result.profile) {

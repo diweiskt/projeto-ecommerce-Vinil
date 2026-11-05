@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Put, Req } from '@nestjs/common';
 import { Request } from 'express';
 import { IsDateString, IsOptional, IsString, MinLength } from 'class-validator';
+import { Roles } from '../auth/roles.decorator';
 import { ProfilesService } from './profiles.service';
 
 class SaveOwnProfileDto {
@@ -10,6 +11,7 @@ class SaveOwnProfileDto {
 }
 
 @Controller('account-profile')
+@Roles('ADMIN', 'CUSTOMER')
 export class AccountProfileController {
   constructor(private profilesService: ProfilesService) {}
 

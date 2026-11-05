@@ -90,6 +90,7 @@ export async function getGenres(): Promise<Genre[]> {
 
 export interface AuthResponse {
   access_token: string;
+  user?: { role: string };
 }
 
 // Mensagens de validação do class-validator vêm em inglês

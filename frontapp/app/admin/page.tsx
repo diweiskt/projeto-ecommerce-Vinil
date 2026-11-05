@@ -2,11 +2,12 @@ import Link from "next/link";
 import styles from "./admin.module.css";
 
 import AdminShell from "./AdminShell";
-import { requireAdmin } from "../lib/admin";
+import { requirePanelAccess } from "../lib/admin";
 import { getArtists, getGenres, getVinyls } from "../lib/api";
 
 export default async function AdminPage() {
-  await requireAdmin();
+  const user = await requirePanelAccess();
+  const canEdit = user.role === "ADMIN";
 
   const [vinyls, artists, genres] = await Promise.all([
     getVinyls().catch(() => null),
@@ -30,9 +31,9 @@ export default async function AdminPage() {
       active="dashboard"
       title="Painel"
       actions={
-        <Link href="/admin/vinyls/new" className={styles.primary}>
+        canEdit && (<Link href="/admin/vinyls/new" className={styles.primary}>
           + Novo disco
-        </Link>
+        </Link>)
       }
     >
       <section className={styles.shortcuts}>
@@ -41,10 +42,10 @@ export default async function AdminPage() {
           <span>Ver a lista, editar preços e estoque ou excluir discos.</span>
         </Link>
 
-        <Link href="/admin/vinyls/new">
+        {canEdit && (<Link href="/admin/vinyls/new">
           <strong>Cadastrar disco</strong>
           <span>Adicionar um novo disco ao catálogo da loja.</span>
-        </Link>
+        </Link>)}
 
         <Link href="/admin/artists">
           <strong>Artistas</strong>
@@ -56,17 +57,17 @@ export default async function AdminPage() {
           <span>Organizar os gêneros musicais usados no catálogo.</span>
         </Link>
 
-        <Link href="/admin/users">
+        {canEdit && (<Link href="/admin/users">
           <strong>Gerenciar usuários</strong>
           <span>
             Consultar contas, cadastrar usuários e administrar acessos.
           </span>
-        </Link>
+        </Link>)}
 
-        <Link href="/admin/profiles">
+        {canEdit && (<Link href="/admin/profiles">
           <strong>Gerenciar perfis</strong>
           <span>Consultar e manter os dados complementares dos usuários.</span>
-        </Link>
+        </Link>)}
       </section>
     </AdminShell>
   );

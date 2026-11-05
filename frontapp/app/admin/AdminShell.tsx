@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import styles from "./admin.module.css";
 
+import { requirePanelAccess } from "../lib/admin";
+
 import Header from "../components/Header/Header";
 
 interface AdminShellProps {
@@ -11,12 +13,13 @@ interface AdminShellProps {
   children: ReactNode;
 }
 
-export default function AdminShell({
+export default async function AdminShell({
   active,
   title,
   actions,
   children,
 }: AdminShellProps) {
+  const user = await requirePanelAccess();
   return (
     <div className={styles.adminLayout}>
       <Header />
@@ -28,7 +31,7 @@ export default function AdminShell({
             <h1>{title}</h1>
           </div>
 
-          {actions}
+          {user.role === "ADMIN" && actions}
         </header>
 
         <nav className={styles.subnav} aria-label="Administração">
@@ -64,23 +67,24 @@ export default function AdminShell({
             Gêneros
           </Link>
 
-          <Link
+          {user.role === "ADMIN" && (<Link
             href="/admin/users"
             className={active === "users" ? styles.activeLink : undefined}
             aria-current={active === "users" ? "page" : undefined}
           >
             Usuários
-          </Link>
+          </Link>)}
 
-          <Link
+          {user.role === "ADMIN" && (<Link
             href="/admin/profiles"
             className={active === "profiles" ? styles.activeLink : undefined}
             aria-current={active === "profiles" ? "page" : undefined}
           >
             Perfis
-          </Link>
+          </Link>)}
         </nav>
 
+        {user.role === "DEMO" && <p>Modo demonstração: somente leitura.</p>}
         {children}
       </main>
 

@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styles from "./login.module.css";
-import { loginAction, registerAction } from "../lib/auth-actions";
+import { demoLoginAction, loginAction, registerAction } from "../lib/auth-actions";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -13,6 +13,25 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  async function handleDemoLogin() {
+    if (loading) return;
+    setError("");
+    setLoading(true);
+    try {
+      const result = await demoLoginAction();
+      if (result.error) {
+        setError(result.error);
+        return;
+      }
+      router.push("/admin");
+      router.refresh();
+    } catch {
+      setError("Não foi possível entrar na demonstração. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   function switchMode(registerMode: boolean) {
     setIsRegister(registerMode);
     setError("");
@@ -20,6 +39,7 @@ export default function LoginPage() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (loading) return;
     setError("");
 
     const form = new FormData(event.currentTarget);
@@ -217,6 +237,21 @@ export default function LoginPage() {
                   : "Entrar"}
               <span>→</span>
             </button>
+            {!isRegister && (
+              <>
+                <button
+                  type="button"
+                  className={styles.demoButton}
+                  disabled={loading}
+                  onClick={handleDemoLogin}
+                >
+                  Testar Demo <span aria-hidden="true">→</span>
+                </button>
+                <p className={styles.demoHint}>
+                  Explore o painel em modo somente leitura, sem precisar criar uma conta.
+                </p>
+              </>
+            )}
           </form>
 
           <p className={styles.switchText}>
