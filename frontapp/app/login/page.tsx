@@ -4,12 +4,11 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styles from "./login.module.css";
-import { demoLoginAction, loginAction, registerAction } from "../lib/auth-actions";
+import { demoLoginAction, loginAction } from "../lib/auth-actions";
 
 export default function LoginPage() {
   const router = useRouter();
 
-  const [isRegister, setIsRegister] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -32,11 +31,6 @@ export default function LoginPage() {
     }
   }
 
-  function switchMode(registerMode: boolean) {
-    setIsRegister(registerMode);
-    setError("");
-  }
-
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (loading) return;
@@ -44,23 +38,14 @@ export default function LoginPage() {
 
     const form = new FormData(event.currentTarget);
 
-    const name = String(form.get("name") ?? "").trim();
     const email = String(form.get("email") ?? "").trim();
     const password = String(form.get("password") ?? "");
-    const confirmPassword = String(form.get("confirmPassword") ?? "");
     const remember = form.get("remember") === "on";
-
-    if (isRegister && password !== confirmPassword) {
-      setError("As senhas não coincidem.");
-      return;
-    }
 
     setLoading(true);
 
     try {
-      const result = isRegister
-        ? await registerAction({ name, email, password })
-        : await loginAction({ email, password, remember });
+      const result = await loginAction({ email, password, remember });
 
       if (result.error) {
         setError(result.error);
@@ -114,52 +99,15 @@ export default function LoginPage() {
         </Link>
 
         <div className={styles.formContainer}>
-          <span className={styles.formEyebrow}>
-            {isRegister ? "FAÇA PARTE DA COMUNIDADE" : "BEM-VINDO DE VOLTA"}
-          </span>
+          <span className={styles.formEyebrow}>BEM-VINDO DE VOLTA</span>
 
-          <h2>{isRegister ? "Crie sua conta." : "Entre na sua conta."}</h2>
+          <h2>Entre na sua conta.</h2>
 
           <p className={styles.description}>
-            {isRegister
-              ? "Cadastre-se para começar sua coleção."
-              : "Entre para continuar explorando nossa coleção."}
+            Entre para continuar explorando nossa coleção.
           </p>
 
-          <div className={styles.tabs}>
-            <button
-              type="button"
-              className={!isRegister ? styles.activeTab : ""}
-              onClick={() => switchMode(false)}
-            >
-              Entrar
-            </button>
-
-            <button
-              type="button"
-              className={isRegister ? styles.activeTab : ""}
-              onClick={() => switchMode(true)}
-            >
-              Criar conta
-            </button>
-          </div>
-
           <form className={styles.form} onSubmit={handleSubmit}>
-            {isRegister && (
-              <div className={styles.field}>
-                <label htmlFor="name">Nome completo</label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Como podemos te chamar?"
-                  autoComplete="name"
-                  minLength={3}
-                  required
-                />
-              </div>
-            )}
-
             <div className={styles.field}>
               <label htmlFor="email">E-mail</label>
               <input
@@ -179,45 +127,28 @@ export default function LoginPage() {
                 name="password"
                 type="password"
                 placeholder="Digite sua senha"
-                autoComplete={isRegister ? "new-password" : "current-password"}
-                minLength={isRegister ? 8 : 6}
+                autoComplete="current-password"
+                minLength={6}
                 required
               />
             </div>
 
-            {isRegister && (
-              <div className={styles.field}>
-                <label htmlFor="confirmPassword">Confirmar senha</label>
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="password"
-                  placeholder="Digite sua senha novamente"
-                  autoComplete="new-password"
-                  minLength={8}
-                  required
-                />
-              </div>
-            )}
+            <div className={styles.formOptions}>
+              <label className={styles.remember}>
+                <input type="checkbox" name="remember" />
+                <span>Manter conectado</span>
+              </label>
 
-            {!isRegister && (
-              <div className={styles.formOptions}>
-                <label className={styles.remember}>
-                  <input type="checkbox" name="remember" />
-                  <span>Manter conectado</span>
-                </label>
-
-                <button
-                  type="button"
-                  className={styles.forgotPassword}
-                  onClick={() =>
-                    alert("A recuperação de senha será implementada depois.")
-                  }
-                >
-                  Esqueci minha senha
-                </button>
-              </div>
-            )}
+              <button
+                type="button"
+                className={styles.forgotPassword}
+                onClick={() =>
+                  alert("A recuperação de senha será implementada depois.")
+                }
+              >
+                Esqueci minha senha
+              </button>
+            </div>
 
             {error && (
               <p className={styles.error} role="alert">
@@ -230,36 +161,25 @@ export default function LoginPage() {
               className={styles.submitButton}
               disabled={loading}
             >
-              {loading
-                ? "Aguarde..."
-                : isRegister
-                  ? "Criar minha conta"
-                  : "Entrar"}
+              {loading ? "Aguarde..." : "Entrar"}
               <span>→</span>
             </button>
-            {!isRegister && (
-              <>
-                <button
-                  type="button"
-                  className={styles.demoButton}
-                  disabled={loading}
-                  onClick={handleDemoLogin}
-                >
-                  Testar Demo <span aria-hidden="true">→</span>
-                </button>
-                <p className={styles.demoHint}>
-                  Explore o painel em modo somente leitura, sem precisar criar uma conta.
-                </p>
-              </>
-            )}
-          </form>
 
-          <p className={styles.switchText}>
-            {isRegister ? "Já tem uma conta?" : "Ainda não tem uma conta?"}{" "}
-            <button type="button" onClick={() => switchMode(!isRegister)}>
-              {isRegister ? "Entrar" : "Cadastre-se"}
-            </button>
-          </p>
+            <>
+              <button
+                type="button"
+                className={styles.demoButton}
+                disabled={loading}
+                onClick={handleDemoLogin}
+              >
+                Testar Demo <span aria-hidden="true">→</span>
+              </button>
+              <p className={styles.demoHint}>
+                Explore o painel em modo somente leitura, sem precisar criar uma
+                conta.
+              </p>
+            </>
+          </form>
 
           <div className={styles.divider}>
             <span>VINYL STORE</span>
